@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const { registerUser, loginUser, getUserProfile } = require('../controllers/userController');
 const { protect } = require('../middleware/authMiddleware');
 
-router.get('/profile', protect, async (req, res) => {
-  res.json({
-    _id: req.user._id,
-    name: req.user.name,
-    email: req.user.email,
-    bio: req.user.bio,
-    avatar: req.user.avatar,
-    isVerified: req.user.isVerified
-  });
-});
+// @route   POST /api/users
+// @desc    Register new user
+router.post('/', registerUser);
+
+// @route   POST /api/users/login  
+// @desc    Login user
+router.post('/login', loginUser);
+
+// @route   GET /api/users/profile
+// @desc    Get user profile
+router.get('/profile', protect, getUserProfile);
 
 module.exports = router;
