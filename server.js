@@ -15,8 +15,13 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Routes - Ei line tai main
 app.use('/api/auth', require('./routes/auth'));
+
 const userRoutes = require('./routes/user');
 app.use('/api/users', userRoutes);  // <-- EKHANE 's' LAGBE
+
+// POST ROUTES ADD KORLAM 👇
+const postRoutes = require('./routes/post');
+app.use('/api/posts', postRoutes);
 
 // Test Route
 app.get('/', (req, res) => {
